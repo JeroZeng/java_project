@@ -1,0 +1,22 @@
+JNI libraries are named with the library name used in the System.loadLibrary method of your Java code with a prefix and a suffix. On different OS, the prefix and suffix might be different.
+
+On Solaris OS, it is prefixed by 'lib' and suffixed with '.so'
+
+# cc -Kpic -G -o libhello.so -I/usr/java/include -I/usr/java/include/solaris HelloJNI.c -z text
+
+On Linux OS, it is prefixed by 'lib' and suffixed with '.so'.
+
+# gcc -shared -fpic -o libhello.so -I/usr/java/include -I/usr/java/include/linux HelloJNI.c
+
+On Windows OS, it is prefixed by nothing and suffixed with '.dll'.
+It could be compiled with Visual Studio automatically and create a file named as hello.dll.
+
+On Mac OS, it is prefixed by 'lib' and suffixed with '.jnilib'.
+
+# gcc -dynamiclib -o libfhello.jnilib -I/System/Library/Frameworks/JavaVM.framework/Headers HelloJNI.c -framework JavaVM
+
+ 
+
+To run the JNI program locally, the following command is fine:
+
+# java -Djava.library.path=<path_of_native_lib> HelloJNI 
